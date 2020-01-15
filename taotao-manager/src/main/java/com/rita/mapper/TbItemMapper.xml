@@ -7,4 +7,82 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findTbItemById" parameterType="long" resultType="com.rita.bean.TbItem">
 		SELECT * FROM tbitem WHERE id = #{id}
 	</select>
+	<select id="findTbItemAll" parameterType="int" resultType="com.rita.bean.TbItem">
+		SELECT * FROM tbitem LIMIT #{0},#{1}
+	</select>
+	<select id="findTbItemCount" resultType="int">
+		SELECT count(*) FROM tbitem 
+	</select>
+	<!-- 
+	<delete id="deleteItemById">
+		UPDATE tbitem SET status =0
+		<where>
+			<foreach collection="ids" open="id in(" separator="," close=")" item="id">
+				#{id}
+			</foreach>
+		</where>
+	</delete>
+	 -->
+	 <update id="updateItemByIds">
+	 	<if test="type==0">
+	 		UPDATE tbitem SET status =0
+	 		<where>
+			<foreach collection="ids" open="id in(" separator="," close=")" item="id">
+				#{id}
+			</foreach>
+		</where>
+	 	</if>
+	 	<if test="type==1">
+	 		UPDATE tbitem SET status =1
+	 		<where>
+			<foreach collection="ids" open="id in(" separator="," close=")" item="id">
+				#{id}
+			</foreach>
+		</where>
+	 	</if>
+	 	<if test="type==2">
+	 		UPDATE tbitem SET status =2
+	 		<where>
+			<foreach collection="ids" open="id in(" separator="," close=")" item="id">
+				#{id}
+			</foreach>
+		</where>
+	 	</if>
+	 </update>
+	 <select id="searchItem" resultType="com.rita.bean.TbItem">
+	 	SELECT * FROM tbitem
+	 		<where>
+		 	<if test="sellPoint!=null and sellPoint!=''">
+		 		and sellPoint like CONCAT('%','${sellPoint}','%')
+		 	</if>
+		 	<if test="title!=null and title!=''">
+		 		and title like CONCAT('%','${title}','%')
+		 	</if>
+		 	<if test="price!=null and price!=''">
+		 		and price=#{price}
+		 	</if>
+		 	</where>
+		 	limit #{page},#{limit}
+	 </select>
+	  <select id="searchItemCount" resultType="int">
+	 	SELECT count(*) FROM tbitem
+	 		<where>
+		 	<if test="sellPoint!=null and sellPoint!=''">
+		 		and sellPoint like CONCAT('%','${sellPoint}','%')
+		 	</if>
+		 	<if test="title!=null and title!=''">
+		 		and title like CONCAT('%','${title}','%')
+		 	</if>
+		 	<if test="price!=null and price!=''">
+		 		and price=#{price}
+		 	</if>
+		 	</where>
+		 	
+	 </select>
+	 <select id="statisticsItemCId" resultType="com.rita.bean.TbItem">
+		SELECT * FROM tbitem GROUP BY cId
+	</select>
+	<select id="findTbItemCountByCId" resultType="int">
+		SELECT COUNT(*) FROM tbitem WHERE cId = #{cId}
+	</select>
 </mapper>

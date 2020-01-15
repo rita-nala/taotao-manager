@@ -5,8 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>淘淘商城后台</title>
+<style type="text/css">
+	body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+</style>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/layui/css/layui.css">
+<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=IiccBr3j7u7iPOZc9Cj2pzt1yKBBPDGG"></script>
+<script
+	src="${pageContext.request.contextPath }/js/echarts-en.common.min.js"></script>
 </head>
 <body class="layui-layout-body">
 	<div class="layui-layout layui-layout-admin">
@@ -114,30 +120,160 @@
 			<!-- 内容主体区域
 				 $("#content").load("/jsp/showItem.jsp");
 			 -->
-			<div id="content" style="padding: 15px;">内容主体区域</div>
-		</div>
+			<div id="content" style="padding: 15px;">
+				<div style="padding: 20px; background-color: #F2F2F2;">
+					<div class="layui-row layui-col-space15">
+						<div class="layui-col-md3">
+							<div class="layui-card">
+								<div class="layui-card-header">
+									<div>
+										<span>访问量</span> <span style="float: right; margin-top: 13px"
+											class="layui-badge layui-bg-blue">周</span>
+									</div>
+								</div>
+								<div class="layui-card-body">
+									<span style="font-size: 36px; color: #676767">9999</span><br>
+									<br> <span style="color: #676767">总访问量</span><i
+										style="float: right;" class="layui-icon layui-icon-flag"></i>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-md3">
+							<div class="layui-card">
+								<div class="layui-card-header">
+									<div>
+										<span>访问量</span> <span style="float: right; margin-top: 13px"
+											class="layui-badge layui-bg-blue">周</span>
+									</div>
+								</div>
+								<div class="layui-card-body">
+									<span style="font-size: 36px; color: #676767">9999</span><br>
+									<br> <span style="color: #676767">总访问量</span><i
+										style="float: right;" class="layui-icon layui-icon-flag"></i>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-md3">
+							<div class="layui-card">
+								<div class="layui-card-header">
+									<div>
+										<span>访问量</span> <span style="float: right; margin-top: 13px"
+											class="layui-badge layui-bg-blue">周</span>
+									</div>
+								</div>
+								<div class="layui-card-body">
+									<span style="font-size: 36px; color: #676767">9999</span><br>
+									<br> <span style="color: #676767">总访问量</span><i
+										style="float: right;" class="layui-icon layui-icon-flag"></i>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-md3">
+							<div class="layui-card">
+								<div class="layui-card-header">
+									<div>
+										<span>访问量</span> <span style="float: right; margin-top: 13px"
+											class="layui-badge layui-bg-blue">周</span>
+									</div>
+								</div>
+								<div class="layui-card-body">
+									<span style="font-size: 36px; color: #676767">9999</span><br>
+									<br> <span style="color: #676767">总访问量</span><i
+										style="float: right;" class="layui-icon layui-icon-flag"></i>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-md12">
+							<div class="layui-col-md6">
+								<div class="layui-card">
+									<div class="layui-card-header">商品分类统计</div>
+									<div class="layui-card-body">
+										<div id="main" style="width: 600px; height: 400px;"></div>
+									</div>
+								</div>
+							</div>
+							<div class="layui-col-md6">
+								<div class="layui-card">
+									<div class="layui-card-header">当前地址</div>
+									<div class="layui-card-body">
+										<div style="width: 400px; height: 400px;" id="allmap"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-		<div class="layui-footer">
-			<!-- 底部固定区域 -->
-			© 欢迎来到淘淘商城后台管理系统
+			<div class="layui-footer">
+				<!-- 底部固定区域 -->
+				© 欢迎来到淘淘商城后台管理系统
+			</div>
 		</div>
-	</div>
-	<script src="${pageContext.request.contextPath }/layui/layui.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/js/jquery-2.1.0.min.js"></script>
+		<script src="${pageContext.request.contextPath }/layui/layui.js"></script>
+		<script
+			src="${pageContext.request.contextPath }/js/jquery-2.1.0.min.js"></script>
 
-	<script>
-//JavaScript代码区域
-layui.use('element', function(){
-  var element = layui.element;
-  
-});
-$("#showItem").click(function(){
-	 $("#content").load("/jsp/showItem.jsp");
-})
-$("#addItemCat").click(function(){
-	$("#content").load("/jsp/addItemCat.jsp");
-})
-</script>
+		<script>
+			//JavaScript代码区域
+			layui.use('element', function() {
+				var element = layui.element;
+
+			});
+			$("#showItem").click(function() {
+				$("#content").load("/jsp/showItem.jsp");
+			})
+			$("#addItemCat").click(function() {
+				$("#content").load("/jsp/addItemCat.jsp");
+			})
+		</script>
+		<script type="text/javascript">
+			// 基于准备好的dom，初始化echarts实例
+			var myChart = echarts.init(document.getElementById('main'));
+			var weatherIcons = {
+
+			};
+			$.get('/itemCat/statisticsItem').done(function(resule) {
+				myChart.setOption({
+					title : {
+						text : '商品分类统计',
+						left : 'center'
+					},
+					tooltip : {
+						trigger : 'item',
+						formatter : '{a} <br/>{b} : {c} ({d}%)'
+					},
+					series : [ {
+						type : 'pie',
+						radius : '65%',
+						center : [ '50%', '50%' ],
+						selectedMode : 'single',
+						data : resule
+					} ]
+				});
+			})
+			// 指定图表的配置项和数据
+			<!--
+			var option = {
+
+			};
+
+			// 使用刚指定的配置项和数据显示图表。
+			myChart.setOption(option);
+			-->
+		</script>
 </body>
 </html>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");    // 创建Map实例
+	map.centerAndZoom(new BMap.Point(104.06, 30.67), 11);  // 初始化地图,设置中心点坐标和地图级别
+	//添加地图类型控件
+	map.addControl(new BMap.MapTypeControl({
+		mapTypes:[
+            BMAP_NORMAL_MAP,
+            BMAP_HYBRID_MAP
+        ]}));	  
+	map.setCurrentCity("成都");          // 设置地图显示的城市 此项是必须设置的
+	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+</script>
